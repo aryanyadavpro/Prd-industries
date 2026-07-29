@@ -37,18 +37,18 @@
 - **No SQL string concatenation** — use Supabase client's parameterized query builder only.
 
 ## Current State
-- [x] Scaffold complete — Next.js 16 (App Router, TS strict, Tailwind v4, ESLint) builds with zero errors.
-- [x] Folder structure matches `context.md`: `app/`, `components/`, `lib/`, `types/`, `docs/`, `public/images/`.
-- [x] Placeholder pages: `/` (marketing), `/about`, `/products`, `/products/[slug]`, `/contact`.
-- [x] API route stub: `POST /api/enquiry`.
-- [x] SEO stubs: `sitemap.ts`, `robots.ts`.
-- [x] Typed database schema: `types/database.ts` (categories, products, enquiries per PRD §10).
-- [x] Supabase client stubs: `lib/supabase/client.ts` (browser), `lib/supabase/server.ts` (server-only guard).
-- [x] Lib stubs: `mailer.ts`, `validation.ts`, `rate-limit.ts`.
-- [x] `.env.example` with all env var names from `context.md`.
-- [ ] Next task: Supabase schema creation + seed data + RLS policies (Milestone 2).
+- [x] Scaffold complete — Next.js 16 (App Router, TS strict, Tailwind v4, ESLint).
+- [x] UI primitives built: `Button`, `Card`, `SectionHeading` (fluid `clamp()` sizing).
+- [x] Layout components: `Navbar` (glassmorphism, mobile hamburger), `Footer` (4-column grid).
+- [x] All 5 pages built with mock data: Home (hero, categories, stats, CTA), About, Products (category filter), Product Detail (specs table, breadcrumb), Contact (enquiry form, WhatsApp, direct contact).
+- [x] Product components: `ProductCard`, `ProductGrid`, `SpecTable`.
+- [x] Form components: `EnquiryForm` (honeypot, success state), `WhatsAppButton`.
+- [x] `siteConfig.ts` + `mockData.ts` (8 products, 4 categories).
+- [x] Dark navy + gold accent design, Inter font, 17 routes build clean.
+- [ ] Next task: Wire Supabase (schema, seed, RLS) + replace mock data with real queries.
 
 ## Log
 _(One line per completed milestone — append only, oldest first)_
 - `YYYY-MM-DD` — Initial PRD, context.md, implementation.md, agent.md authored.
 - `2026-07-29` — Milestone 1: Project scaffold complete. Next.js 16 + TS strict + Tailwind v4 + ESLint. All pages/routes build clean.
+- `2026-07-29` — Milestones 3–6 (UI): All pages, components, forms built with mock data. 17 routes, zero build errors.

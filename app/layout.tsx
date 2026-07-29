@@ -1,10 +1,18 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+import { siteConfig } from "@/lib/siteConfig";
 import "@/app/globals.css";
 
+const inter = Inter({ subsets: ["latin"], display: "swap" });
+
 export const metadata: Metadata = {
-  title: "PRD Industries — Industrial Products",
-  description:
-    "Browse our catalog of industrial products and request a quote. Quality components for manufacturing and engineering.",
+  title: {
+    default: `${siteConfig.name} — ${siteConfig.tagline}`,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
 };
 
 export default function RootLayout({
@@ -13,9 +21,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="min-h-screen bg-white text-gray-900 antialiased">
-        {children}
+    <html lang="en" className={inter.className}>
+      <body className="min-h-screen flex flex-col antialiased">
+        <Navbar />
+        <div className="flex-1 pt-[clamp(3.5rem,6vw,4.5rem)]">{children}</div>
+        <Footer />
       </body>
     </html>
   );
