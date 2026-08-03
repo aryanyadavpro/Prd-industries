@@ -45,10 +45,12 @@
 - [x] Form components: `EnquiryForm` (honeypot, success state), `WhatsAppButton`.
 - [x] `siteConfig.ts` + `mockData.ts` (8 products, 4 categories).
 - [x] Dark navy + gold accent design, Inter font, 17 routes build clean.
-- [ ] Next task: Wire Supabase (schema, seed, RLS) + replace mock data with real queries.
+- [x] Email SMTP integration: `mailer.ts` (Nodemailer + Gmail App Password), `validation.ts` (zod), `rate-limit.ts` (IP token bucket), `/api/enquiry` route fully wired, `EnquiryForm` POSTs to API with loading/error states.
+- [ ] Next task: Wire Supabase (schema, seed, RLS) + replace mock data with real queries + add Supabase insert to enquiry route.
 
 ## Log
 _(One line per completed milestone — append only, oldest first)_
 - `YYYY-MM-DD` — Initial PRD, context.md, implementation.md, agent.md authored.
 - `2026-07-29` — Milestone 1: Project scaffold complete. Next.js 16 + TS strict + Tailwind v4 + ESLint. All pages/routes build clean.
 - `2026-07-29` — Milestones 3–6 (UI): All pages, components, forms built with mock data. 17 routes, zero build errors.
+- `2026-08-03` — Email gateway complete: nodemailer + zod + rate-limit + API route + form wired. Build clean, 17 routes.

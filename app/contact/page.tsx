@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { EnquiryForm } from "@/components/forms/EnquiryForm";
-import { WhatsAppButton } from "@/components/forms/WhatsAppButton";
+
 import { siteConfig } from "@/lib/siteConfig";
 
 export const metadata: Metadata = {
   title: "Contact Us",
-  description: `Get in touch with ${siteConfig.name}. Send an enquiry, request a quote, or reach out via WhatsApp.`,
+  description: `Get in touch with ${siteConfig.name}. Send an enquiry, request a quote, or contact us directly.`,
 };
 
 export default function ContactPage() {
@@ -73,16 +73,7 @@ export default function ContactPage() {
                 </ul>
               </div>
 
-              {/* WhatsApp card */}
-              <div className="rounded-[clamp(0.75rem,2vw,1rem)] border border-green-800/50 bg-green-900/10 p-[clamp(1rem,3vw,2rem)] text-center">
-                <h3 className="text-[clamp(1rem,1.8vw,1.25rem)] font-semibold text-white mb-[clamp(0.25rem,0.8vw,0.5rem)]">
-                  Prefer WhatsApp?
-                </h3>
-                <p className="text-[clamp(0.8rem,1.2vw,0.9rem)] text-gray-400 mb-[clamp(0.75rem,2vw,1rem)]">
-                  Get a faster response — chat with us directly.
-                </p>
-                <WhatsAppButton />
-              </div>
+
             </div>
           </div>
         </div>

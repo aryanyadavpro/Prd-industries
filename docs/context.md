@@ -10,7 +10,7 @@ Industrial products enquiry website (catalog + lead-gen contact/enquiry system).
 - Tailwind CSS — fluid layout using `vw`/`vh` + `clamp()`, not fixed breakpoints only
 - Supabase (Postgres + Storage), Row Level Security ON
 - Nodemailer + Gmail SMTP (App Password) for enquiry emails
-- WhatsApp via `wa.me` deep link (no paid API)
+
 - Hosting: Vercel
 
 ## Folder Structure (source of truth)
@@ -30,7 +30,7 @@ Industrial products enquiry website (catalog + lead-gen contact/enquiry system).
   /ui                             -- Button, Input, Textarea, Card, etc. (primitives only)
   /layout                         -- Navbar, Footer
   /product                        -- ProductCard, ProductGrid, SpecTable
-  /forms                          -- EnquiryForm, WhatsAppButton
+  /forms                          -- EnquiryForm
 /lib
   supabase/client.ts               -- browser client
   supabase/server.ts                -- server client (service role, server-only)
@@ -58,7 +58,7 @@ SMTP_PORT
 SMTP_USER
 SMTP_APP_PASSWORD                # Gmail App Password, NOT the account password
 BUSINESS_NOTIFY_EMAIL
-NEXT_PUBLIC_WHATSAPP_NUMBER
+NEXT_PUBLIC_PHONE
 ```
 
 ## Core Data Entities
@@ -74,4 +74,4 @@ NEXT_PUBLIC_WHATSAPP_NUMBER
 - Don't add e-commerce/cart/payment logic.
 - Don't add visitor auth/login.
 - Don't call Supabase service-role client from client components — server-only.
-- Don't hardcode email/WhatsApp number/business details in components — pull from env or a single `siteConfig.ts`.
+- Don't hardcode email/phone/business details in components — pull from env or a single `siteConfig.ts`.

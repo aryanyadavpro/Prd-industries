@@ -109,15 +109,6 @@ export default function HomePage() {
               <LinkButton href="/contact" size="lg">
                 Contact Us
               </LinkButton>
-              <LinkButton
-                href={`https://wa.me/${siteConfig.whatsapp}`}
-                variant="secondary"
-                size="lg"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                WhatsApp Us
-              </LinkButton>
             </div>
           </div>
         </div>

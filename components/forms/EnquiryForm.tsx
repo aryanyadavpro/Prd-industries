@@ -9,9 +9,14 @@ interface EnquiryFormProps {
 
 export function EnquiryForm({ prefilledProduct }: EnquiryFormProps) {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({});
 
   const inputClass =
     "w-full rounded-[clamp(0.375rem,1vw,0.5rem)] border border-gray-700 bg-gray-800/60 px-[clamp(0.75rem,2vw,1rem)] py-[clamp(0.5rem,1.5vw,0.75rem)] text-[clamp(0.875rem,1.3vw,1rem)] text-white placeholder-gray-500 outline-none transition-colors focus:border-amber-500 focus:ring-1 focus:ring-amber-500/30";
+
+  const errorClass = "mt-1 text-[clamp(0.7rem,1vw,0.8rem)] text-red-400";
 
   if (submitted) {
     return (
@@ -31,17 +36,61 @@ export function EnquiryForm({ prefilledProduct }: EnquiryFormProps) {
     );
   }
 
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setError(null);
+    setFieldErrors({});
+    setLoading(true);
+
+    const formData = new FormData(e.currentTarget);
+    const payload = {
+      name: formData.get("name") as string,
+      company: formData.get("company") as string,
+      email: formData.get("email") as string,
+      phone: formData.get("phone") as string,
+      product: formData.get("product") as string,
+      message: formData.get("message") as string,
+      website: formData.get("website") as string, // honeypot
+    };
+
+    try {
+      const res = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        if (data.issues) {
+          setFieldErrors(data.issues);
+        }
+        setError(data.error ?? "Something went wrong.");
+        return;
+      }
+
+      setSubmitted(true);
+    } catch {
+      setError("Network error. Please check your connection and try again.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        // TODO: POST to /api/enquiry once backend is wired
-        setSubmitted(true);
-      }}
+      onSubmit={handleSubmit}
       className="space-y-[clamp(0.75rem,2.5vw,1.25rem)]"
     >
       {/* Honeypot — hidden from real users, caught by bots */}
       <input type="text" name="website" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+
+      {error && (
+        <div className="rounded-lg border border-red-800 bg-red-900/20 px-4 py-3 text-[clamp(0.8rem,1.1vw,0.875rem)] text-red-400">
+          {error}
+        </div>
+      )}
 
       <div className="grid grid-cols-1 gap-[clamp(0.75rem,2.5vw,1.25rem)] sm:grid-cols-2">
         <div>
@@ -49,12 +98,14 @@ export function EnquiryForm({ prefilledProduct }: EnquiryFormProps) {
             Name <span className="text-amber-500">*</span>
           </label>
           <input id="enquiry-name" name="name" type="text" required placeholder="Your full name" className={inputClass} />
+          {fieldErrors.name && <p className={errorClass}>{fieldErrors.name[0]}</p>}
         </div>
         <div>
           <label htmlFor="enquiry-company" className="mb-[clamp(0.25rem,0.8vw,0.375rem)] block text-[clamp(0.8rem,1.1vw,0.875rem)] font-medium text-gray-300">
             Company
           </label>
           <input id="enquiry-company" name="company" type="text" placeholder="Company name" className={inputClass} />
+          {fieldErrors.company && <p className={errorClass}>{fieldErrors.company[0]}</p>}
         </div>
       </div>
 
@@ -64,12 +115,14 @@ export function EnquiryForm({ prefilledProduct }: EnquiryFormProps) {
             Email <span className="text-amber-500">*</span>
           </label>
           <input id="enquiry-email" name="email" type="email" required placeholder="you@company.com" className={inputClass} />
+          {fieldErrors.email && <p className={errorClass}>{fieldErrors.email[0]}</p>}
         </div>
         <div>
           <label htmlFor="enquiry-phone" className="mb-[clamp(0.25rem,0.8vw,0.375rem)] block text-[clamp(0.8rem,1.1vw,0.875rem)] font-medium text-gray-300">
             Phone <span className="text-amber-500">*</span>
           </label>
           <input id="enquiry-phone" name="phone" type="tel" required placeholder="+91 98765 43210" className={inputClass} />
+          {fieldErrors.phone && <p className={errorClass}>{fieldErrors.phone[0]}</p>}
         </div>
       </div>
 
@@ -85,6 +138,7 @@ export function EnquiryForm({ prefilledProduct }: EnquiryFormProps) {
           placeholder="e.g. Spiral Wound Gasket"
           className={inputClass}
         />
+        {fieldErrors.product && <p className={errorClass}>{fieldErrors.product[0]}</p>}
       </div>
 
       <div>
@@ -99,10 +153,11 @@ export function EnquiryForm({ prefilledProduct }: EnquiryFormProps) {
           placeholder="Tell us about your requirements..."
           className={inputClass + " resize-y"}
         />
+        {fieldErrors.message && <p className={errorClass}>{fieldErrors.message[0]}</p>}
       </div>
 
-      <Button type="submit" size="lg" className="w-full sm:w-auto">
-        Send Enquiry
+      <Button type="submit" size="lg" className="w-full sm:w-auto" disabled={loading}>
+        {loading ? "Sending..." : "Send Enquiry"}
       </Button>
     </form>
   );

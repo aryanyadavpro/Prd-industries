@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { products, categories } from "@/lib/mockData";
 import { SpecTable } from "@/components/product/SpecTable";
 import { LinkButton } from "@/components/ui/Button";
-import { WhatsAppButton } from "@/components/forms/WhatsAppButton";
+
 
 interface ProductDetailPageProps {
   params: Promise<{ slug: string }>;
@@ -97,7 +97,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
               >
                 Send Enquiry
               </LinkButton>
-              <WhatsAppButton productName={product.name} />
+
             </div>
           </div>
         </div>
