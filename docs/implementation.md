@@ -49,6 +49,7 @@
 - [x] Supabase wired: schema (3 tables) + RLS + seed script in `scripts/supabase-schema.sql`. Server client (`supabaseAdmin`), browser client, query helpers (`lib/supabase/queries.ts`). All pages fetch from Supabase (ISR 3600s). Products page split into server wrapper + `ProductsFilter` client component. Enquiry route inserts into `enquiries` table. `mockData.ts` deleted. Sitemap generates per-product URLs.
 - [x] Generated high-quality industrial product images for all 8 products (`public/images/`), updated `ProductCard` & `ProductDetailPage` to render using `next/image`, updated database records via Supabase service key.
 - [x] SEO & Security Pass: OWASP security headers in `next.config.ts` (HSTS, CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy), OpenGraph & Twitter metadata, JSON-LD Organization schema on layout, JSON-LD Product schema on detail page, Metadata exports on all routes.
+- [x] Performance Pass: Next.js image optimization configured (AVIF/WebP formats, 30-day cache TTL, device/image sizes), React `cache()` wrapped around Supabase query functions to deduplicate per-request queries.
 - [ ] Next task: Vercel deployment & production verification.
 
 ## Log
@@ -60,3 +61,4 @@ _(One line per completed milestone — append only, oldest first)_
 - `2026-08-04` — Supabase wired: 3 tables + RLS + seed, all pages on live queries (ISR), enquiry inserts, mockData deleted.
 - `2026-08-04` — Generated product images for all 8 products, integrated `next/image` in product listing & detail pages.
 - `2026-08-04` — SEO & Security pass: security headers in `next.config.ts`, OpenGraph metadata, JSON-LD Organization & Product schemas. Build clean (17 routes).
+- `2026-08-04` — Performance pass: image optimization in `next.config.ts` (AVIF/WebP, 30d TTL), React request caching on database queries.
