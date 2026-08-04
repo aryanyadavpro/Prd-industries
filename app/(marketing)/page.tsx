@@ -20,27 +20,30 @@ export default async function HomePage() {
     <main>
       {/* Hero */}
       <section className="relative section-py overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 via-transparent to-blue-500/5" />
-        <div className="absolute top-[25vh] left-[15vw] w-[40vw] h-[40vw] rounded-full bg-amber-500/5 blur-3xl" />
-
         <div className="container-fluid relative">
-          <div className="mx-auto max-w-[clamp(20rem,60vw,48rem)] text-center">
-            <p className="mb-[clamp(0.75rem,2vw,1rem)] inline-block rounded-full border border-amber-500/30 bg-amber-500/10 px-[clamp(0.75rem,2.5vw,1rem)] py-[clamp(0.25rem,0.8vw,0.375rem)] text-[clamp(0.75rem,1.2vw,0.875rem)] font-medium text-amber-400">
-              Trusted Since {siteConfig.foundedYear}
-            </p>
-            <h1 className="fluid-hero font-extrabold tracking-tight text-white">
+          <div className="mx-auto max-w-[clamp(20rem,60vw,52rem)] text-center">
+            {/* Soft UI Pill Badge */}
+            <div className="mb-[clamp(1rem,2.5vw,1.5rem)] inline-flex items-center gap-2 rounded-full neu-inset-sm px-[clamp(1rem,3vw,1.25rem)] py-[clamp(0.35rem,1vw,0.5rem)]">
+              <span className="w-2 h-2 rounded-full bg-[#6C63FF] animate-pulse" />
+              <span className="text-[clamp(0.75rem,1.2vw,0.875rem)] font-display font-bold text-[#3D4852]">
+                Trusted Manufacturers Since {siteConfig.foundedYear}
+              </span>
+            </div>
+
+            <h1 className="fluid-hero font-display font-extrabold tracking-tight text-[#3D4852]">
               Precision-Engineered{" "}
-              <span className="text-amber-400">Industrial Components</span>
+              <span className="text-[#6C63FF]">Industrial Components</span>
             </h1>
-            <p className="fluid-subhero mt-[clamp(0.75rem,2.5vw,1.5rem)] text-gray-400">
-              From gaskets to flanges — high-quality components built to
+            <p className="fluid-subhero mt-[clamp(1rem,3vw,1.75rem)] text-[#6B7280] max-w-2xl mx-auto leading-relaxed">
+              From high-pressure gaskets to custom forged flanges — engineered to
               withstand extreme conditions. Request a quote in seconds.
             </p>
-            <div className="mt-[clamp(1.5rem,4vw,2.5rem)] flex flex-col sm:flex-row items-center justify-center gap-[clamp(0.75rem,2vw,1rem)]">
+
+            <div className="mt-[clamp(2rem,5vw,3rem)] flex flex-col sm:flex-row items-center justify-center gap-[clamp(1rem,2.5vw,1.5rem)]">
               <LinkButton href="/products" size="lg">
                 Browse Products
               </LinkButton>
-              <LinkButton href="/contact" variant="outline" size="lg">
+              <LinkButton href="/contact" variant="secondary" size="lg">
                 Get a Quote
               </LinkButton>
             </div>
@@ -49,26 +52,27 @@ export default async function HomePage() {
       </section>
 
       {/* Categories */}
-      <section className="section-py bg-gray-900/30">
+      <section className="section-py">
         <div className="container-fluid">
           <SectionHeading
             title="Product Categories"
-            subtitle="Explore our range of industrial sealing and connection solutions"
+            subtitle="Explore our specialized range of sealing and fluid-handling solutions"
           />
-          <div className="grid grid-cols-1 gap-[clamp(0.75rem,2.5vw,1.5rem)] sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-[clamp(1.25rem,3vw,2rem)] sm:grid-cols-2 lg:grid-cols-4">
             {categories.map((cat) => (
-              <Link key={cat.id} href={`/products?category=${cat.slug}`}>
+              <Link key={cat.id} href={`/products?category=${cat.slug}`} className="block group">
                 <Card>
                   <CardBody className="text-center">
-                    <div className="mx-auto mb-[clamp(0.75rem,2vw,1rem)] flex h-[clamp(2.5rem,5vw,3.5rem)] w-[clamp(2.5rem,5vw,3.5rem)] items-center justify-center rounded-[clamp(0.5rem,1.2vw,0.75rem)] bg-amber-500/10">
-                      <svg className="icon-lg text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                    {/* Deep Inset Icon Well */}
+                    <div className="mx-auto mb-[clamp(1rem,2.5vw,1.5rem)] flex h-16 w-16 items-center justify-center rounded-2xl neu-inset-deep group-hover:scale-105 transition-transform duration-300">
+                      <svg className="w-8 h-8 text-[#6C63FF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                       </svg>
                     </div>
-                    <h3 className="text-[clamp(0.95rem,1.6vw,1.125rem)] font-semibold text-white">
+                    <h3 className="font-display text-[clamp(1.05rem,1.8vw,1.25rem)] font-bold text-[#3D4852] group-hover:text-[#6C63FF] transition-colors">
                       {cat.name}
                     </h3>
-                    <p className="mt-[clamp(0.25rem,0.8vw,0.375rem)] text-[clamp(0.8rem,1.2vw,0.875rem)] text-gray-400">
+                    <p className="mt-[clamp(0.375rem,1vw,0.5rem)] text-[clamp(0.85rem,1.2vw,0.925rem)] text-[#6B7280] leading-relaxed">
                       {cat.description}
                     </p>
                   </CardBody>
@@ -82,13 +86,13 @@ export default async function HomePage() {
       {/* Stats */}
       <section className="section-py">
         <div className="container-fluid">
-          <div className="grid grid-cols-2 gap-[clamp(1rem,4vw,2rem)] lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-[clamp(1.25rem,3vw,2rem)] lg:grid-cols-4">
             {stats.map((stat) => (
-              <div key={stat.label} className="text-center">
-                <p className="text-[clamp(2rem,6vw,3.5rem)] font-extrabold text-amber-400">
+              <div key={stat.label} className="p-[clamp(1.25rem,3vw,2rem)] rounded-[32px] neu-extruded text-center">
+                <p className="font-display text-[clamp(2.25rem,6vw,3.75rem)] font-extrabold text-[#6C63FF]">
                   {stat.value}
                 </p>
-                <p className="mt-[clamp(0.125rem,0.5vw,0.25rem)] text-[clamp(0.8rem,1.3vw,0.95rem)] text-gray-400">
+                <p className="mt-1 text-[clamp(0.85rem,1.3vw,1rem)] font-medium text-[#6B7280]">
                   {stat.label}
                 </p>
               </div>
@@ -100,15 +104,14 @@ export default async function HomePage() {
       {/* CTA */}
       <section className="section-py">
         <div className="container-fluid">
-          <div className="rounded-[clamp(0.75rem,2vw,1rem)] bg-gradient-to-r from-amber-500/10 to-amber-600/5 border border-amber-500/20 p-[clamp(1.5rem,6vw,4rem)] text-center">
-            <h2 className="text-[clamp(1.5rem,4vw,2.25rem)] font-bold text-white">
+          <div className="rounded-[32px] neu-extruded p-[clamp(2rem,6vw,4.5rem)] text-center">
+            <h2 className="font-display text-[clamp(1.75rem,4vw,2.5rem)] font-extrabold text-[#3D4852]">
               Need a Custom Solution?
             </h2>
-            <p className="mt-[clamp(0.5rem,1.5vw,0.75rem)] text-[clamp(0.9rem,1.5vw,1.125rem)] text-gray-400 max-w-[clamp(16rem,45vw,36rem)] mx-auto">
-              Our engineering team can source or manufacture components to your
-              exact specifications. Reach out today.
+            <p className="mt-[clamp(0.75rem,2vw,1rem)] text-[clamp(0.95rem,1.5vw,1.15rem)] text-[#6B7280] max-w-xl mx-auto leading-relaxed">
+              Our engineering team manufactures high-specification industrial components to your exact drawings. Reach out today.
             </p>
-            <div className="mt-[clamp(1.5rem,4vw,2rem)] flex flex-col sm:flex-row items-center justify-center gap-[clamp(0.75rem,2vw,1rem)]">
+            <div className="mt-[clamp(1.75rem,4vw,2.5rem)] flex justify-center">
               <LinkButton href="/contact" size="lg">
                 Contact Us
               </LinkButton>

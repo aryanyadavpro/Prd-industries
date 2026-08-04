@@ -17,15 +17,15 @@ export function SectionHeading({
     <div
       className={clsx(
         align === "center" && "text-center",
-        "mb-[clamp(2rem,5vw,3.5rem)]",
-        className,
+        "mb-[clamp(2.5rem,6vw,4rem)]",
+        className
       )}
     >
-      <h2 className="text-[clamp(1.5rem,4vw,2.5rem)] font-bold text-white">
+      <h2 className="font-display text-[clamp(1.75rem,4vw,2.75rem)] font-extrabold tracking-tight text-[#3D4852]">
         {title}
       </h2>
       {subtitle && (
-        <p className="mt-[clamp(0.5rem,1.5vw,1rem)] text-[clamp(0.875rem,1.5vw,1.125rem)] text-gray-400 max-w-2xl mx-auto">
+        <p className="mt-[clamp(0.5rem,1.5vw,0.875rem)] text-[clamp(0.9rem,1.5vw,1.1rem)] text-[#6B7280] max-w-2xl mx-auto leading-relaxed">
           {subtitle}
         </p>
       )}

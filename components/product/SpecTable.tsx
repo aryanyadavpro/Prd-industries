@@ -7,14 +7,14 @@ export function SpecTable({ specs }: SpecTableProps) {
   if (entries.length === 0) return null;
 
   return (
-    <div className="overflow-hidden rounded-[clamp(0.5rem,1.5vw,0.75rem)] border border-gray-800">
-      <table className="w-full text-[clamp(0.8rem,1.2vw,0.9rem)]">
+    <div className="overflow-hidden rounded-[24px] neu-inset p-2">
+      <table className="w-full text-[clamp(0.85rem,1.2vw,0.95rem)]">
         <thead>
-          <tr className="bg-gray-800/60">
-            <th className="px-[clamp(0.75rem,2.5vw,1.25rem)] py-[clamp(0.5rem,1.5vw,0.75rem)] text-left font-semibold text-gray-300">
-              Property
+          <tr className="border-b border-[#A3B1C6]/40">
+            <th className="px-[clamp(1rem,2.5vw,1.5rem)] py-3 text-left font-display font-bold text-[#3D4852]">
+              Specification
             </th>
-            <th className="px-[clamp(0.75rem,2.5vw,1.25rem)] py-[clamp(0.5rem,1.5vw,0.75rem)] text-left font-semibold text-gray-300">
+            <th className="px-[clamp(1rem,2.5vw,1.5rem)] py-3 text-left font-display font-bold text-[#3D4852]">
               Value
             </th>
           </tr>
@@ -23,12 +23,12 @@ export function SpecTable({ specs }: SpecTableProps) {
           {entries.map(([key, value], i) => (
             <tr
               key={key}
-              className={i % 2 === 0 ? "bg-gray-900/40" : "bg-gray-900/20"}
+              className={i !== entries.length - 1 ? "border-b border-[#A3B1C6]/20" : ""}
             >
-              <td className="px-[clamp(0.75rem,2.5vw,1.25rem)] py-[clamp(0.375rem,1vw,0.625rem)] text-gray-400 font-medium">
+              <td className="px-[clamp(1rem,2.5vw,1.5rem)] py-3 text-[#6B7280] font-medium">
                 {key}
               </td>
-              <td className="px-[clamp(0.75rem,2.5vw,1.25rem)] py-[clamp(0.375rem,1vw,0.625rem)] text-white">
+              <td className="px-[clamp(1rem,2.5vw,1.5rem)] py-3 text-[#3D4852] font-semibold">
                 {value}
               </td>
             </tr>

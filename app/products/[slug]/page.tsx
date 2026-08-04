@@ -63,81 +63,85 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="container-fluid">
-        {/* Breadcrumb */}
-        <nav className="mb-[clamp(1rem,3vw,2rem)] text-[clamp(0.8rem,1.2vw,0.875rem)] text-gray-500">
-          <Link href="/products" className="hover:text-amber-400 transition-colors">
+        {/* Breadcrumb Pill */}
+        <nav className="mb-[clamp(1.5rem,3vw,2.5rem)] inline-flex items-center gap-2 p-2 rounded-full neu-inset-sm text-[clamp(0.8rem,1.2vw,0.875rem)] font-medium text-[#6B7280]">
+          <Link href="/products" className="px-3 py-1 rounded-full hover:text-[#6C63FF] hover:neu-extruded-sm transition-all">
             Products
           </Link>
           {category && (
             <>
-              <span className="mx-[clamp(0.375rem,0.8vw,0.5rem)]">/</span>
-              <span className="text-gray-400">{category.name}</span>
+              <span>/</span>
+              <span className="px-2 py-1 text-[#3D4852]">{category.name}</span>
             </>
           )}
-          <span className="mx-[clamp(0.375rem,0.8vw,0.5rem)]">/</span>
-          <span className="text-white">{product.name}</span>
+          <span>/</span>
+          <span className="px-2 py-1 font-semibold text-[#3D4852]">{product.name}</span>
         </nav>
 
-        <div className="grid grid-cols-1 gap-[clamp(1.5rem,5vw,3rem)] lg:grid-cols-2">
-          {/* Image area */}
-          <div className="relative aspect-square rounded-[clamp(0.75rem,2vw,1rem)] bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-800 flex items-center justify-center overflow-hidden">
-            {hasRealImage ? (
-              <Image
-                src={imageUrl}
-                alt={product.name}
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
-              />
-            ) : (
-              <svg
-                className="icon-hero text-gray-700"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1.5}
-                  d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+        <div className="grid grid-cols-1 gap-[clamp(2rem,5vw,3.5rem)] lg:grid-cols-2">
+          {/* Deep Inset Image Container */}
+          <div className="p-4 rounded-[32px] neu-extruded">
+            <div className="relative aspect-square rounded-[24px] neu-inset-deep flex items-center justify-center overflow-hidden">
+              {hasRealImage ? (
+                <Image
+                  src={imageUrl}
+                  alt={product.name}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
                 />
-              </svg>
-            )}
+              ) : (
+                <svg
+                  className="w-16 h-16 text-[#6B7280]"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+                  />
+                </svg>
+              )}
+            </div>
           </div>
 
-          {/* Details */}
-          <div>
-            {category && (
-              <span className="inline-block rounded-full bg-amber-500/10 border border-amber-500/30 px-[clamp(0.5rem,1.5vw,0.75rem)] py-[clamp(0.125rem,0.5vw,0.25rem)] text-[clamp(0.7rem,1vw,0.8rem)] font-medium text-amber-400 mb-[clamp(0.5rem,1.5vw,0.75rem)]">
-                {category.name}
-              </span>
-            )}
-            <h1 className="text-[clamp(1.75rem,4.5vw,2.5rem)] font-bold text-white">
-              {product.name}
-            </h1>
-            <p className="mt-[clamp(0.5rem,1.5vw,0.75rem)] text-[clamp(0.9rem,1.4vw,1.1rem)] text-gray-400 leading-relaxed">
-              {product.short_description}
-            </p>
+          {/* Details Card */}
+          <div className="p-[clamp(1.5rem,4vw,2.5rem)] rounded-[32px] neu-extruded flex flex-col justify-between">
+            <div>
+              {category && (
+                <span className="inline-block rounded-full neu-inset-sm px-4 py-1.5 text-[clamp(0.75rem,1.1vw,0.85rem)] font-display font-bold text-[#6C63FF] mb-4">
+                  {category.name}
+                </span>
+              )}
+              <h1 className="font-display text-[clamp(1.85rem,4.5vw,2.75rem)] font-extrabold text-[#3D4852] tracking-tight">
+                {product.name}
+              </h1>
+              <p className="mt-3 text-[clamp(0.95rem,1.4vw,1.1rem)] text-[#6B7280] leading-relaxed">
+                {product.short_description}
+              </p>
 
-            {/* Specs */}
-            <div className="mt-[clamp(1.25rem,3.5vw,2rem)]">
-              <h2 className="text-[clamp(1rem,1.8vw,1.25rem)] font-semibold text-white mb-[clamp(0.5rem,1.5vw,0.75rem)]">
-                Technical Specifications
-              </h2>
-              <SpecTable specs={product.specs} />
+              {/* Specs Table */}
+              <div className="mt-8">
+                <h2 className="font-display text-[clamp(1.1rem,1.8vw,1.3rem)] font-bold text-[#3D4852] mb-3">
+                  Technical Specifications
+                </h2>
+                <SpecTable specs={product.specs} />
+              </div>
             </div>
 
             {/* Actions */}
-            <div className="mt-[clamp(1.25rem,3.5vw,2rem)] flex flex-col sm:flex-row gap-[clamp(0.5rem,1.5vw,0.75rem)]">
+            <div className="mt-8 pt-6 border-t border-[#A3B1C6]/30 flex flex-col sm:flex-row gap-4">
               <LinkButton
                 href={`/contact?product=${encodeURIComponent(product.name)}`}
                 size="lg"
+                className="w-full sm:w-auto"
               >
                 Send Enquiry
               </LinkButton>
-
             </div>
           </div>
         </div>

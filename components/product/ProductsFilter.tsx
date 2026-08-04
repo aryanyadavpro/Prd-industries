@@ -18,14 +18,14 @@ export default function ProductsFilter({ categories, products }: ProductsFilterP
 
   return (
     <>
-      {/* Category tabs */}
-      <div className="mb-[clamp(1.5rem,4vw,2.5rem)] flex flex-wrap gap-[clamp(0.375rem,1vw,0.5rem)] justify-center">
+      {/* Category filter track */}
+      <div className="mb-[clamp(2rem,5vw,3rem)] p-2 rounded-full neu-inset max-w-fit mx-auto flex flex-wrap gap-2 justify-center">
         <button
           onClick={() => setActiveCategory(null)}
-          className={`rounded-full px-[clamp(0.75rem,2.5vw,1.25rem)] py-[clamp(0.375rem,1vw,0.5rem)] text-[clamp(0.8rem,1.2vw,0.9rem)] font-medium transition-colors cursor-pointer ${
+          className={`rounded-full px-[clamp(1rem,2.5vw,1.5rem)] py-[clamp(0.5rem,1vw,0.65rem)] text-[clamp(0.85rem,1.2vw,0.95rem)] font-display font-bold transition-all duration-300 cursor-pointer ${
             activeCategory === null
-              ? "bg-amber-500 text-gray-950"
-              : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+              ? "neu-accent text-white"
+              : "neu-extruded-sm text-[#6B7280] hover:text-[#3D4852] hover:neu-extruded"
           }`}
         >
           All
@@ -34,10 +34,10 @@ export default function ProductsFilter({ categories, products }: ProductsFilterP
           <button
             key={cat.id}
             onClick={() => setActiveCategory(cat.id)}
-            className={`rounded-full px-[clamp(0.75rem,2.5vw,1.25rem)] py-[clamp(0.375rem,1vw,0.5rem)] text-[clamp(0.8rem,1.2vw,0.9rem)] font-medium transition-colors cursor-pointer ${
+            className={`rounded-full px-[clamp(1rem,2.5vw,1.5rem)] py-[clamp(0.5rem,1vw,0.65rem)] text-[clamp(0.85rem,1.2vw,0.95rem)] font-display font-bold transition-all duration-300 cursor-pointer ${
               activeCategory === cat.id
-                ? "bg-amber-500 text-gray-950"
-                : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                ? "neu-accent text-white"
+                : "neu-extruded-sm text-[#6B7280] hover:text-[#3D4852] hover:neu-extruded"
             }`}
           >
             {cat.name}

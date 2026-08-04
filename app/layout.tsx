@@ -1,11 +1,23 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Plus_Jakarta_Sans, DM_Sans } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { siteConfig } from "@/lib/siteConfig";
 import "@/app/globals.css";
 
-const inter = Inter({ subsets: ["latin"], display: "swap" });
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-display",
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "700"],
+  variable: "--font-body",
+});
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
 
@@ -62,16 +74,19 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={inter.className}>
+    <html
+      lang="en"
+      className={`${plusJakartaSans.variable} ${dmSans.variable} font-sans scroll-smooth`}
+    >
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen flex flex-col antialiased">
+      <body className="min-h-screen flex flex-col antialiased bg-[#E0E5EC] text-[#3D4852]">
         <Navbar />
-        <div className="flex-1 pt-[clamp(3.5rem,6vw,4.5rem)]">{children}</div>
+        <div className="flex-1 pt-[clamp(4.5rem,7vw,5.5rem)]">{children}</div>
         <Footer />
       </body>
     </html>

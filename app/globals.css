@@ -1,34 +1,95 @@
 @import "tailwindcss";
 
-/* --- Custom Properties --- */
+/* --- Neumorphism Design Tokens --- */
 :root {
-  --color-navy: #0f172a;
-  --color-navy-light: #1e293b;
-  --color-gold: #d4a853;
+  --color-base: #E0E5EC;
+  --color-foreground: #3D4852;
+  --color-muted: #6B7280;
+  --color-accent: #6C63FF;
+  --color-accent-hover: #8B84FF;
+  --color-accent-teal: #38B2AC;
+
+  --shadow-light: rgba(255, 255, 255, 0.55);
+  --shadow-dark: rgba(163, 177, 198, 0.6);
+
+  --font-display: var(--font-display), 'Plus Jakarta Sans', sans-serif;
+  --font-body: var(--font-body), 'DM Sans', sans-serif;
 }
 
-/* --- Base Resets --- */
+/* --- Base Styling --- */
 html {
   scroll-behavior: smooth;
+  font-family: var(--font-body);
 }
 
 body {
-  background-color: var(--color-navy);
-  color: #e2e8f0;
+  background-color: var(--color-base);
+  color: var(--color-foreground);
+  font-family: var(--font-body);
 }
 
-/* --- Fluid Typography Scale --- */
+h1, h2, h3, h4, h5, h6, .font-display {
+  font-family: var(--font-display);
+}
+
+/* --- Neumorphic Shadow Utilities --- */
+.neu-extruded {
+  background-color: #E0E5EC;
+  box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.6), -9px -9px 16px rgba(255, 255, 255, 0.55);
+}
+
+.neu-extruded-hover {
+  background-color: #E0E5EC;
+  box-shadow: 12px 12px 20px rgba(163, 177, 198, 0.7), -12px -12px 20px rgba(255, 255, 255, 0.65);
+}
+
+.neu-extruded-sm {
+  background-color: #E0E5EC;
+  box-shadow: 5px 5px 10px rgba(163, 177, 198, 0.6), -5px -5px 10px rgba(255, 255, 255, 0.55);
+}
+
+.neu-inset {
+  background-color: #E0E5EC;
+  box-shadow: inset 6px 6px 10px rgba(163, 177, 198, 0.6), inset -6px -6px 10px rgba(255, 255, 255, 0.55);
+}
+
+.neu-inset-deep {
+  background-color: #E0E5EC;
+  box-shadow: inset 10px 10px 20px rgba(163, 177, 198, 0.7), inset -10px -10px 20px rgba(255, 255, 255, 0.65);
+}
+
+.neu-inset-sm {
+  background-color: #E0E5EC;
+  box-shadow: inset 3px 3px 6px rgba(163, 177, 198, 0.6), inset -3px -3px 6px rgba(255, 255, 255, 0.55);
+}
+
+/* Primary Color Neumorphism (Accent Button) */
+.neu-accent {
+  background-color: #6C63FF;
+  box-shadow: 6px 6px 14px rgba(108, 99, 255, 0.4), -6px -6px 14px rgba(255, 255, 255, 0.6);
+}
+
+.neu-accent:hover {
+  background-color: #8B84FF;
+  box-shadow: 8px 8px 18px rgba(108, 99, 255, 0.5), -8px -8px 18px rgba(255, 255, 255, 0.7);
+}
+
+.neu-accent:active {
+  box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.25), inset -4px -4px 8px rgba(255, 255, 255, 0.3);
+}
+
+/* --- Fluid Typography & Spacing --- */
 .fluid-hero {
-  font-size: clamp(2rem, 6vw, 4rem);
+  font-size: clamp(2.25rem, 6vw, 4.25rem);
   line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
 .fluid-subhero {
-  font-size: clamp(1rem, 2vw, 1.375rem);
-  line-height: 1.5;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.6;
 }
 
-/* --- Utility: Container with fluid padding --- */
 .container-fluid {
   width: 100%;
   max-width: 80rem;
@@ -36,44 +97,22 @@ body {
   padding-inline: clamp(1rem, 5vw, 2.5rem);
 }
 
-/* --- Section spacing (vh-based for vertical rhythm) --- */
 .section-py {
-  padding-block: clamp(3rem, 10vh, 6rem);
+  padding-block: clamp(3.5rem, 10vh, 6.5rem);
 }
 
-/* --- Fluid spacing utilities --- */
-.gap-fluid-sm { gap: clamp(0.5rem, 1.5vw, 0.75rem); }
-.gap-fluid    { gap: clamp(0.75rem, 2vw, 1.25rem); }
-.gap-fluid-md { gap: clamp(1rem, 3vw, 1.5rem); }
-.gap-fluid-lg { gap: clamp(1.5rem, 4vw, 2.5rem); }
-.gap-fluid-xl { gap: clamp(2rem, 5vw, 3.5rem); }
+/* --- Ambient Floating Keyframe Animation --- */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
 
-.mt-fluid-xs { margin-top: clamp(0.25rem, 0.8vw, 0.5rem); }
-.mt-fluid-sm { margin-top: clamp(0.5rem, 1.5vw, 0.75rem); }
-.mt-fluid    { margin-top: clamp(0.75rem, 2vw, 1.25rem); }
-.mt-fluid-md { margin-top: clamp(1rem, 2.5vw, 1.5rem); }
-.mt-fluid-lg { margin-top: clamp(1.5rem, 4vw, 2.5rem); }
-.mt-fluid-xl { margin-top: clamp(2rem, 5vw, 3.5rem); }
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
 
-.mb-fluid-sm { margin-bottom: clamp(0.5rem, 1.5vw, 0.75rem); }
-.mb-fluid    { margin-bottom: clamp(0.75rem, 2vw, 1.25rem); }
-.mb-fluid-md { margin-bottom: clamp(1rem, 2.5vw, 1.5rem); }
-.mb-fluid-lg { margin-bottom: clamp(1.5rem, 4vw, 2.5rem); }
-
-.p-fluid-sm  { padding: clamp(0.75rem, 2vw, 1.25rem); }
-.p-fluid     { padding: clamp(1rem, 3vw, 1.5rem); }
-.p-fluid-md  { padding: clamp(1.25rem, 3.5vw, 2rem); }
-.p-fluid-lg  { padding: clamp(1.5rem, 4vw, 2.5rem); }
-.p-fluid-xl  { padding: clamp(2rem, 5vw, 4rem); }
-
-.py-fluid-sm { padding-block: clamp(0.5rem, 1.5vw, 0.75rem); }
-.py-fluid    { padding-block: clamp(0.75rem, 2vw, 1.25rem); }
-.px-fluid    { padding-inline: clamp(0.75rem, 2vw, 1.25rem); }
-.px-fluid-md { padding-inline: clamp(1rem, 3vw, 1.5rem); }
-
-/* --- Fluid icon sizes --- */
-.icon-sm { width: clamp(1rem, 2vw, 1.25rem); height: clamp(1rem, 2vw, 1.25rem); }
-.icon-md { width: clamp(1.25rem, 2.5vw, 1.5rem); height: clamp(1.25rem, 2.5vw, 1.5rem); }
-.icon-lg { width: clamp(1.5rem, 3.5vw, 2rem); height: clamp(1.5rem, 3.5vw, 2rem); }
-.icon-xl { width: clamp(3rem, 6vw, 4rem); height: clamp(3rem, 6vw, 4rem); }
-.icon-hero { width: clamp(4rem, 8vw, 6rem); height: clamp(4rem, 8vw, 6rem); }
+/* --- Custom Focus Outline for Accessibility --- */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 2px solid #6C63FF;
+  outline-offset: 2px;
+}

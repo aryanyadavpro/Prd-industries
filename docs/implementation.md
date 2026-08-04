@@ -50,6 +50,7 @@
 - [x] Generated high-quality industrial product images for all 8 products (`public/images/`), updated `ProductCard` & `ProductDetailPage` to render using `next/image`, updated database records via Supabase service key.
 - [x] SEO & Security Pass: OWASP security headers in `next.config.ts` (HSTS, CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy), OpenGraph & Twitter metadata, JSON-LD Organization schema on layout, JSON-LD Product schema on detail page, Metadata exports on all routes.
 - [x] Performance Pass: Next.js image optimization configured (AVIF/WebP formats, 30-day cache TTL, device/image sizes), React `cache()` wrapped around Supabase query functions to deduplicate per-request queries.
+- [x] Neumorphism (Soft UI) Redesign Pass: Integrated soft clay theme (#E0E5EC background, #3D4852 high contrast text, #6C63FF accent), loaded Plus Jakarta Sans & DM Sans fonts, dual RGBA extruded & inset shadow system, refactored UI primitives (Button, Card, SectionHeading), layout (Navbar, Footer), feature components (ProductCard, ProductsFilter, SpecTable, EnquiryForm), and all 5 pages.
 - [ ] Next task: Vercel deployment & production verification.
 
 ## Log
@@ -62,3 +63,4 @@ _(One line per completed milestone — append only, oldest first)_
 - `2026-08-04` — Generated product images for all 8 products, integrated `next/image` in product listing & detail pages.
 - `2026-08-04` — SEO & Security pass: security headers in `next.config.ts`, OpenGraph metadata, JSON-LD Organization & Product schemas. Build clean (17 routes).
 - `2026-08-04` — Performance pass: image optimization in `next.config.ts` (AVIF/WebP, 30d TTL), React request caching on database queries.
+- `2026-08-04` — Neumorphism (Soft UI) redesign: complete theme overhaul with dual RGBA shadows, Plus Jakarta Sans & DM Sans fonts, soft clay components across all 5 pages.

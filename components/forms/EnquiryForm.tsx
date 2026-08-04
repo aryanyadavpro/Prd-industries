@@ -14,22 +14,22 @@ export function EnquiryForm({ prefilledProduct }: EnquiryFormProps) {
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({});
 
   const inputClass =
-    "w-full rounded-[clamp(0.375rem,1vw,0.5rem)] border border-gray-700 bg-gray-800/60 px-[clamp(0.75rem,2vw,1rem)] py-[clamp(0.5rem,1.5vw,0.75rem)] text-[clamp(0.875rem,1.3vw,1rem)] text-white placeholder-gray-500 outline-none transition-colors focus:border-amber-500 focus:ring-1 focus:ring-amber-500/30";
+    "w-full rounded-2xl neu-inset px-4 py-3.5 text-[clamp(0.9rem,1.3vw,1rem)] text-[#3D4852] placeholder-[#6B7280]/60 outline-none transition-all duration-300 focus:neu-inset-deep focus:ring-2 focus:ring-[#6C63FF]";
 
-  const errorClass = "mt-1 text-[clamp(0.7rem,1vw,0.8rem)] text-red-400";
+  const errorClass = "mt-1.5 text-xs font-semibold text-rose-500";
 
   if (submitted) {
     return (
-      <div className="rounded-[clamp(0.75rem,2vw,1rem)] border border-green-800 bg-green-900/20 p-[clamp(1.5rem,5vw,2.5rem)] text-center">
-        <div className="mx-auto mb-[clamp(0.75rem,2vw,1rem)] flex h-[clamp(3rem,8vw,4rem)] w-[clamp(3rem,8vw,4rem)] items-center justify-center rounded-full bg-green-900/40">
-          <svg className="icon-lg text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div className="rounded-[32px] neu-extruded p-[clamp(2rem,5vw,3rem)] text-center">
+        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl neu-inset text-[#38B2AC]">
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-[clamp(1.125rem,2.5vw,1.5rem)] font-bold text-white">
+        <h3 className="font-display text-[clamp(1.25rem,2.5vw,1.5rem)] font-bold text-[#3D4852]">
           Enquiry Sent!
         </h3>
-        <p className="mt-[clamp(0.375rem,1vw,0.5rem)] text-[clamp(0.85rem,1.2vw,0.95rem)] text-gray-400">
+        <p className="mt-2 text-[clamp(0.85rem,1.2vw,0.95rem)] text-[#6B7280]">
           We&apos;ll get back to you within 24 hours.
         </p>
       </div>
@@ -81,27 +81,27 @@ export function EnquiryForm({ prefilledProduct }: EnquiryFormProps) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-[clamp(0.75rem,2.5vw,1.25rem)]"
+      className="space-y-[clamp(1rem,2.5vw,1.5rem)]"
     >
       {/* Honeypot — hidden from real users, caught by bots */}
       <input type="text" name="website" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
 
       {error && (
-        <div className="rounded-lg border border-red-800 bg-red-900/20 px-4 py-3 text-[clamp(0.8rem,1.1vw,0.875rem)] text-red-400">
+        <div className="rounded-2xl neu-inset p-4 text-xs font-semibold text-rose-500">
           {error}
         </div>
       )}
 
-      <div className="grid grid-cols-1 gap-[clamp(0.75rem,2.5vw,1.25rem)] sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-[clamp(1rem,2.5vw,1.5rem)] sm:grid-cols-2">
         <div>
-          <label htmlFor="enquiry-name" className="mb-[clamp(0.25rem,0.8vw,0.375rem)] block text-[clamp(0.8rem,1.1vw,0.875rem)] font-medium text-gray-300">
-            Name <span className="text-amber-500">*</span>
+          <label htmlFor="enquiry-name" className="mb-2 block text-[clamp(0.8rem,1.1vw,0.875rem)] font-display font-bold text-[#3D4852]">
+            Name <span className="text-[#6C63FF]">*</span>
           </label>
           <input id="enquiry-name" name="name" type="text" required placeholder="Your full name" className={inputClass} />
           {fieldErrors.name && <p className={errorClass}>{fieldErrors.name[0]}</p>}
         </div>
         <div>
-          <label htmlFor="enquiry-company" className="mb-[clamp(0.25rem,0.8vw,0.375rem)] block text-[clamp(0.8rem,1.1vw,0.875rem)] font-medium text-gray-300">
+          <label htmlFor="enquiry-company" className="mb-2 block text-[clamp(0.8rem,1.1vw,0.875rem)] font-display font-bold text-[#3D4852]">
             Company
           </label>
           <input id="enquiry-company" name="company" type="text" placeholder="Company name" className={inputClass} />
@@ -109,17 +109,17 @@ export function EnquiryForm({ prefilledProduct }: EnquiryFormProps) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-[clamp(0.75rem,2.5vw,1.25rem)] sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-[clamp(1rem,2.5vw,1.5rem)] sm:grid-cols-2">
         <div>
-          <label htmlFor="enquiry-email" className="mb-[clamp(0.25rem,0.8vw,0.375rem)] block text-[clamp(0.8rem,1.1vw,0.875rem)] font-medium text-gray-300">
-            Email <span className="text-amber-500">*</span>
+          <label htmlFor="enquiry-email" className="mb-2 block text-[clamp(0.8rem,1.1vw,0.875rem)] font-display font-bold text-[#3D4852]">
+            Email <span className="text-[#6C63FF]">*</span>
           </label>
           <input id="enquiry-email" name="email" type="email" required placeholder="you@company.com" className={inputClass} />
           {fieldErrors.email && <p className={errorClass}>{fieldErrors.email[0]}</p>}
         </div>
         <div>
-          <label htmlFor="enquiry-phone" className="mb-[clamp(0.25rem,0.8vw,0.375rem)] block text-[clamp(0.8rem,1.1vw,0.875rem)] font-medium text-gray-300">
-            Phone <span className="text-amber-500">*</span>
+          <label htmlFor="enquiry-phone" className="mb-2 block text-[clamp(0.8rem,1.1vw,0.875rem)] font-display font-bold text-[#3D4852]">
+            Phone <span className="text-[#6C63FF]">*</span>
           </label>
           <input id="enquiry-phone" name="phone" type="tel" required placeholder="+91 98765 43210" className={inputClass} />
           {fieldErrors.phone && <p className={errorClass}>{fieldErrors.phone[0]}</p>}
@@ -127,7 +127,7 @@ export function EnquiryForm({ prefilledProduct }: EnquiryFormProps) {
       </div>
 
       <div>
-        <label htmlFor="enquiry-product" className="mb-[clamp(0.25rem,0.8vw,0.375rem)] block text-[clamp(0.8rem,1.1vw,0.875rem)] font-medium text-gray-300">
+        <label htmlFor="enquiry-product" className="mb-2 block text-[clamp(0.8rem,1.1vw,0.875rem)] font-display font-bold text-[#3D4852]">
           Product of Interest
         </label>
         <input
@@ -142,8 +142,8 @@ export function EnquiryForm({ prefilledProduct }: EnquiryFormProps) {
       </div>
 
       <div>
-        <label htmlFor="enquiry-message" className="mb-[clamp(0.25rem,0.8vw,0.375rem)] block text-[clamp(0.8rem,1.1vw,0.875rem)] font-medium text-gray-300">
-          Message <span className="text-amber-500">*</span>
+        <label htmlFor="enquiry-message" className="mb-2 block text-[clamp(0.8rem,1.1vw,0.875rem)] font-display font-bold text-[#3D4852]">
+          Message <span className="text-[#6C63FF]">*</span>
         </label>
         <textarea
           id="enquiry-message"
