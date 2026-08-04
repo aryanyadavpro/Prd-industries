@@ -1,9 +1,11 @@
 import { LinkButton } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Card, CardBody } from "@/components/ui/Card";
-import { categories } from "@/lib/mockData";
+import { getCategories } from "@/lib/supabase/queries";
 import { siteConfig } from "@/lib/siteConfig";
 import Link from "next/link";
+
+export const revalidate = 3600; // ISR: revalidate every hour
 
 const stats = [
   { value: `${new Date().getFullYear() - siteConfig.foundedYear}+`, label: "Years Experience" },
@@ -12,7 +14,8 @@ const stats = [
   { value: "99%", label: "On-Time Delivery" },
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const categories = await getCategories();
   return (
     <main>
       {/* Hero */}

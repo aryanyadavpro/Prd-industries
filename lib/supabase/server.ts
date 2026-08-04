@@ -1,9 +1,9 @@
 /**
  * Server-only Supabase client — uses service role key, never import in client components.
- * Implementation deferred until @supabase/supabase-js is installed.
  */
 
 import "server-only";
+import { createClient } from "@supabase/supabase-js";
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY ?? "";
@@ -13,6 +13,4 @@ if (process.env.NODE_ENV === "production" && (!SUPABASE_URL || !SUPABASE_SERVICE
   throw new Error("Missing Supabase server env vars");
 }
 
-export { SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY };
-
-// TODO: export createServerClient() once @supabase/supabase-js is added.
+export const supabaseAdmin = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);

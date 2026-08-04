@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { products, categories } from "@/lib/mockData";
+import Link from "next/link";
+import { getProductBySlug, getCategories, getAllProductSlugs } from "@/lib/supabase/queries";
 import { SpecTable } from "@/components/product/SpecTable";
 import { LinkButton } from "@/components/ui/Button";
 
+export const revalidate = 3600; // ISR: revalidate every hour
 
 interface ProductDetailPageProps {
   params: Promise<{ slug: string }>;
@@ -11,7 +13,7 @@ interface ProductDetailPageProps {
 
 export async function generateMetadata({ params }: ProductDetailPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const product = products.find((p) => p.slug === slug);
+  const product = await getProductBySlug(slug);
   if (!product) return { title: "Product Not Found" };
 
   return {
@@ -20,13 +22,18 @@ export async function generateMetadata({ params }: ProductDetailPageProps): Prom
   };
 }
 
-export function generateStaticParams() {
-  return products.map((p) => ({ slug: p.slug }));
+export async function generateStaticParams() {
+  const slugs = await getAllProductSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export default async function ProductDetailPage({ params }: ProductDetailPageProps) {
   const { slug } = await params;
-  const product = products.find((p) => p.slug === slug);
+  const [product, categories] = await Promise.all([
+    getProductBySlug(slug),
+    getCategories(),
+  ]);
+
   if (!product) notFound();
 
   const category = categories.find((c) => c.id === product.category_id);
@@ -36,9 +43,9 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
       <div className="container-fluid">
         {/* Breadcrumb */}
         <nav className="mb-[clamp(1rem,3vw,2rem)] text-[clamp(0.8rem,1.2vw,0.875rem)] text-gray-500">
-          <a href="/products" className="hover:text-amber-400 transition-colors">
+          <Link href="/products" className="hover:text-amber-400 transition-colors">
             Products
-          </a>
+          </Link>
           {category && (
             <>
               <span className="mx-[clamp(0.375rem,0.8vw,0.5rem)]">/</span>

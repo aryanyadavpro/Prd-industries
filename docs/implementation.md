@@ -46,7 +46,8 @@
 - [x] `siteConfig.ts` + `mockData.ts` (8 products, 4 categories).
 - [x] Dark navy + gold accent design, Inter font, 17 routes build clean.
 - [x] Email SMTP integration: `mailer.ts` (Nodemailer + Gmail App Password), `validation.ts` (zod), `rate-limit.ts` (IP token bucket), `/api/enquiry` route fully wired, `EnquiryForm` POSTs to API with loading/error states.
-- [ ] Next task: Wire Supabase (schema, seed, RLS) + replace mock data with real queries + add Supabase insert to enquiry route.
+- [x] Supabase wired: schema (3 tables) + RLS + seed script in `scripts/supabase-schema.sql`. Server client (`supabaseAdmin`), browser client, query helpers (`lib/supabase/queries.ts`). All pages fetch from Supabase (ISR 3600s). Products page split into server wrapper + `ProductsFilter` client component. Enquiry route inserts into `enquiries` table. `mockData.ts` deleted. Sitemap generates per-product URLs.
+- [ ] Next task: SEO pass (generateMetadata per page, JSON-LD Organization + Product), security headers (CSP, HSTS via next.config), performance pass.
 
 ## Log
 _(One line per completed milestone — append only, oldest first)_
@@ -54,3 +55,4 @@ _(One line per completed milestone — append only, oldest first)_
 - `2026-07-29` — Milestone 1: Project scaffold complete. Next.js 16 + TS strict + Tailwind v4 + ESLint. All pages/routes build clean.
 - `2026-07-29` — Milestones 3–6 (UI): All pages, components, forms built with mock data. 17 routes, zero build errors.
 - `2026-08-03` — Email gateway complete: nodemailer + zod + rate-limit + API route + form wired. Build clean, 17 routes.
+- `2026-08-04` — Supabase wired: 3 tables + RLS + seed, all pages on live queries (ISR), enquiry inserts, mockData deleted.
