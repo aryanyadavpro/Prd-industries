@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: var(--font-body), system-ui, sans-serif;
+  --font-display: var(--font-display), system-ui, sans-serif;
+}
+
 /* --- Neumorphism Design Tokens --- */
 :root {
   --color-base: #E0E5EC;
@@ -11,25 +16,22 @@
 
   --shadow-light: rgba(255, 255, 255, 0.55);
   --shadow-dark: rgba(163, 177, 198, 0.6);
-
-  --font-display: var(--font-display), 'Plus Jakarta Sans', sans-serif;
-  --font-body: var(--font-body), 'DM Sans', sans-serif;
 }
 
 /* --- Base Styling --- */
 html {
   scroll-behavior: smooth;
-  font-family: var(--font-body);
+  font-family: var(--font-body), system-ui, -apple-system, sans-serif;
 }
 
 body {
   background-color: var(--color-base);
   color: var(--color-foreground);
-  font-family: var(--font-body);
+  font-family: var(--font-body), system-ui, -apple-system, sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6, .font-display {
-  font-family: var(--font-display);
+  font-family: var(--font-display), system-ui, -apple-system, sans-serif;
 }
 
 /* --- Neumorphic Shadow Utilities --- */
@@ -80,9 +82,9 @@ h1, h2, h3, h4, h5, h6, .font-display {
 
 /* --- Fluid Typography & Spacing --- */
 .fluid-hero {
-  font-size: clamp(2.25rem, 6vw, 4.25rem);
+  font-size: clamp(2.25rem, 5.5vw, 4.25rem);
   line-height: 1.1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
 }
 
 .fluid-subhero {
