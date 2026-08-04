@@ -47,7 +47,9 @@
 - [x] Dark navy + gold accent design, Inter font, 17 routes build clean.
 - [x] Email SMTP integration: `mailer.ts` (Nodemailer + Gmail App Password), `validation.ts` (zod), `rate-limit.ts` (IP token bucket), `/api/enquiry` route fully wired, `EnquiryForm` POSTs to API with loading/error states.
 - [x] Supabase wired: schema (3 tables) + RLS + seed script in `scripts/supabase-schema.sql`. Server client (`supabaseAdmin`), browser client, query helpers (`lib/supabase/queries.ts`). All pages fetch from Supabase (ISR 3600s). Products page split into server wrapper + `ProductsFilter` client component. Enquiry route inserts into `enquiries` table. `mockData.ts` deleted. Sitemap generates per-product URLs.
-- [ ] Next task: SEO pass (generateMetadata per page, JSON-LD Organization + Product), security headers (CSP, HSTS via next.config), performance pass.
+- [x] Generated high-quality industrial product images for all 8 products (`public/images/`), updated `ProductCard` & `ProductDetailPage` to render using `next/image`, updated database records via Supabase service key.
+- [x] SEO & Security Pass: OWASP security headers in `next.config.ts` (HSTS, CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy), OpenGraph & Twitter metadata, JSON-LD Organization schema on layout, JSON-LD Product schema on detail page, Metadata exports on all routes.
+- [ ] Next task: Vercel deployment & production verification.
 
 ## Log
 _(One line per completed milestone — append only, oldest first)_
@@ -56,3 +58,5 @@ _(One line per completed milestone — append only, oldest first)_
 - `2026-07-29` — Milestones 3–6 (UI): All pages, components, forms built with mock data. 17 routes, zero build errors.
 - `2026-08-03` — Email gateway complete: nodemailer + zod + rate-limit + API route + form wired. Build clean, 17 routes.
 - `2026-08-04` — Supabase wired: 3 tables + RLS + seed, all pages on live queries (ISR), enquiry inserts, mockData deleted.
+- `2026-08-04` — Generated product images for all 8 products, integrated `next/image` in product listing & detail pages.
+- `2026-08-04` — SEO & Security pass: security headers in `next.config.ts`, OpenGraph metadata, JSON-LD Organization & Product schemas. Build clean (17 routes).
