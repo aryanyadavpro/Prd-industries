@@ -18,14 +18,14 @@ export default function ProductsFilter({ categories, products }: ProductsFilterP
 
   return (
     <>
-      {/* Category filter track */}
-      <div className="mb-[clamp(2rem,5vw,3rem)] p-2 rounded-full neu-inset max-w-fit mx-auto flex flex-wrap gap-2 justify-center">
+      {/* Category filter pills */}
+      <div className="mb-[clamp(2rem,5vw,3.5rem)] flex flex-wrap gap-[clamp(0.375rem,0.8vw,0.5rem)] justify-center">
         <button
           onClick={() => setActiveCategory(null)}
-          className={`rounded-full px-[clamp(1rem,2.5vw,1.5rem)] py-[clamp(0.5rem,1vw,0.65rem)] text-[clamp(0.85rem,1.2vw,0.95rem)] font-display font-bold transition-all duration-300 cursor-pointer ${
+          className={`px-[clamp(1rem,2vw,1.5rem)] py-[clamp(0.375rem,0.8vh,0.5rem)] text-[clamp(0.6875rem,0.75vw,0.8125rem)] font-medium tracking-[0.08em] uppercase border transition-all duration-300 cursor-pointer ${
             activeCategory === null
-              ? "neu-accent text-white"
-              : "neu-extruded-sm text-[#6B7280] hover:text-[#3D4852] hover:neu-extruded"
+              ? "bg-[#1A1A1A] text-[#FAF8F5] border-[#1A1A1A]"
+              : "bg-transparent text-[#7A7468] border-[#E8E2D9] hover:text-[#1A1A1A] hover:border-[#1A1A1A]"
           }`}
         >
           All
@@ -34,10 +34,10 @@ export default function ProductsFilter({ categories, products }: ProductsFilterP
           <button
             key={cat.id}
             onClick={() => setActiveCategory(cat.id)}
-            className={`rounded-full px-[clamp(1rem,2.5vw,1.5rem)] py-[clamp(0.5rem,1vw,0.65rem)] text-[clamp(0.85rem,1.2vw,0.95rem)] font-display font-bold transition-all duration-300 cursor-pointer ${
+            className={`px-[clamp(1rem,2vw,1.5rem)] py-[clamp(0.375rem,0.8vh,0.5rem)] text-[clamp(0.6875rem,0.75vw,0.8125rem)] font-medium tracking-[0.08em] uppercase border transition-all duration-300 cursor-pointer ${
               activeCategory === cat.id
-                ? "neu-accent text-white"
-                : "neu-extruded-sm text-[#6B7280] hover:text-[#3D4852] hover:neu-extruded"
+                ? "bg-[#1A1A1A] text-[#FAF8F5] border-[#1A1A1A]"
+                : "bg-transparent text-[#7A7468] border-[#E8E2D9] hover:text-[#1A1A1A] hover:border-[#1A1A1A]"
             }`}
           >
             {cat.name}

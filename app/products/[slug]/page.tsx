@@ -57,31 +57,31 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
   };
 
   return (
-    <main className="section-py">
+    <main className="section-py pt-[clamp(5rem,10vh,7.5rem)]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="container-fluid">
-        {/* Breadcrumb Pill */}
-        <nav className="mb-[clamp(1.5rem,3vw,2.5rem)] inline-flex items-center gap-2 p-2 rounded-full neu-inset-sm text-[clamp(0.8rem,1.2vw,0.875rem)] font-medium text-[#6B7280]">
-          <Link href="/products" className="px-3 py-1 rounded-full hover:text-[#6C63FF] hover:neu-extruded-sm transition-all">
+        {/* Breadcrumb */}
+        <nav className="mb-[clamp(2rem,4vh,3rem)] flex items-center gap-[clamp(0.375rem,0.8vw,0.5rem)] text-[clamp(0.75rem,0.8vw,0.8125rem)] text-[#7A7468]">
+          <Link href="/products" className="hover:text-[#8B7355] transition-colors">
             Products
           </Link>
           {category && (
             <>
-              <span>/</span>
-              <span className="px-2 py-1 text-[#3D4852]">{category.name}</span>
+              <span className="text-[#E8E2D9]">/</span>
+              <span className="text-[#7A7468]">{category.name}</span>
             </>
           )}
-          <span>/</span>
-          <span className="px-2 py-1 font-semibold text-[#3D4852]">{product.name}</span>
+          <span className="text-[#E8E2D9]">/</span>
+          <span className="font-medium text-[#1A1A1A]">{product.name}</span>
         </nav>
 
-        <div className="grid grid-cols-1 gap-[clamp(2rem,5vw,3.5rem)] lg:grid-cols-2">
-          {/* Deep Inset Image Container */}
-          <div className="p-4 rounded-[32px] neu-extruded">
-            <div className="relative aspect-square rounded-[24px] neu-inset-deep flex items-center justify-center overflow-hidden">
+        <div className="grid grid-cols-1 gap-[clamp(2rem,5vw,4rem)] lg:grid-cols-2">
+          {/* Image */}
+          <div className="border border-[#E8E2D9] rounded-[clamp(0.75rem,1.5vw,1.25rem)] overflow-hidden bg-[#F3EFE9]">
+            <div className="relative aspect-square flex items-center justify-center">
               {hasRealImage ? (
                 <Image
                   src={imageUrl}
@@ -93,7 +93,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
                 />
               ) : (
                 <svg
-                  className="w-16 h-16 text-[#6B7280]"
+                  className="w-[clamp(3rem,5vw,4rem)] h-[clamp(3rem,5vw,4rem)] text-[#B0A898]"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -101,7 +101,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    strokeWidth={1.5}
+                    strokeWidth={1.25}
                     d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
                   />
                 </svg>
@@ -109,24 +109,24 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
             </div>
           </div>
 
-          {/* Details Card */}
-          <div className="p-[clamp(1.5rem,4vw,2.5rem)] rounded-[32px] neu-extruded flex flex-col justify-between">
+          {/* Details */}
+          <div className="flex flex-col justify-between">
             <div>
               {category && (
-                <span className="inline-block rounded-full neu-inset-sm px-4 py-1.5 text-[clamp(0.75rem,1.1vw,0.85rem)] font-display font-bold text-[#6C63FF] mb-4">
+                <span className="inline-block text-[clamp(0.6875rem,0.75vw,0.8125rem)] font-medium tracking-[0.1em] uppercase text-[#8B7355] mb-[clamp(0.75rem,1.5vh,1rem)]">
                   {category.name}
                 </span>
               )}
-              <h1 className="font-display text-[clamp(1.85rem,4.5vw,2.75rem)] font-extrabold text-[#3D4852] tracking-tight">
+              <h1 className="font-serif text-[clamp(1.75rem,4vw,2.75rem)] font-medium text-[#1A1A1A] tracking-tight">
                 {product.name}
               </h1>
-              <p className="mt-3 text-[clamp(0.95rem,1.4vw,1.1rem)] text-[#6B7280] leading-relaxed">
+              <p className="mt-[clamp(0.5rem,1vh,0.75rem)] fluid-body text-[#7A7468] leading-relaxed">
                 {product.short_description}
               </p>
 
               {/* Specs Table */}
-              <div className="mt-8">
-                <h2 className="font-display text-[clamp(1.1rem,1.8vw,1.3rem)] font-bold text-[#3D4852] mb-3">
+              <div className="mt-[clamp(2rem,4vh,3rem)]">
+                <h2 className="text-[clamp(0.6875rem,0.75vw,0.8125rem)] font-medium tracking-[0.1em] uppercase text-[#7A7468] mb-[clamp(0.75rem,1.5vh,1rem)]">
                   Technical Specifications
                 </h2>
                 <SpecTable specs={product.specs} />
@@ -134,13 +134,21 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
             </div>
 
             {/* Actions */}
-            <div className="mt-8 pt-6 border-t border-[#A3B1C6]/30 flex flex-col sm:flex-row gap-4">
+            <div className="mt-[clamp(2rem,4vh,3rem)] pt-[clamp(1.5rem,3vh,2rem)] border-t border-[#E8E2D9] flex flex-col sm:flex-row gap-[clamp(0.75rem,1.5vw,1rem)]">
               <LinkButton
                 href={`/contact?product=${encodeURIComponent(product.name)}`}
                 size="lg"
                 className="w-full sm:w-auto"
               >
                 Send Enquiry
+              </LinkButton>
+              <LinkButton
+                href="/products"
+                variant="secondary"
+                size="lg"
+                className="w-full sm:w-auto"
+              >
+                ← Back to Products
               </LinkButton>
             </div>
           </div>

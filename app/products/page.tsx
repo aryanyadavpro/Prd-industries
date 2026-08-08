@@ -18,10 +18,11 @@ export default async function ProductsPage() {
   ]);
 
   return (
-    <main>
-      <section className="section-py">
+    <main className="pt-[clamp(5rem,10vh,7.5rem)]">
+      <section className="section-py-sm">
         <div className="container-fluid">
           <SectionHeading
+            label="Our Catalog"
             title="Our Products"
             subtitle="Browse our complete catalog of industrial sealing and connection solutions"
           />
