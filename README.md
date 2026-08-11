@@ -219,19 +219,33 @@ This application implements several layers of security hardening:
 
 ### Vercel (Recommended)
 
+The project includes a [`vercel.json`](vercel.json) pre-configured with:
+- **Region**: `bom1` (Mumbai) — optimised for Indian users
+- **Asset Caching**: Immutable 1-year cache for static assets and images
+
+**Steps:**
+
 1. Push the repository to GitHub.
-2. Import the project on [Vercel](https://vercel.com).
-3. Add all environment variables from the table above in the Vercel dashboard.
-4. Deploy — Vercel auto-detects the Next.js framework.
+2. Go to [vercel.com/new](https://vercel.com/new) and import the repository.
+3. Vercel auto-detects Next.js — no build settings to change.
+4. Add environment variables in **Settings → Environment Variables**:
 
-### Self-Hosted
+   | Variable | Value |
+   |---|---|
+   | `NEXT_PUBLIC_SUPABASE_URL` | Your Supabase project URL |
+   | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon key |
+   | `SUPABASE_SERVICE_ROLE_KEY` | Supabase service role key |
+   | `NEXT_PUBLIC_SITE_URL` | Your production URL (e.g. `https://prdindustries.com`) |
+   | `BUSINESS_NOTIFY_EMAIL` | Email for receiving enquiries |
+   | `SMTP_HOST` | SMTP host (e.g. `smtp.gmail.com`) |
+   | `SMTP_PORT` | SMTP port (default `465`) |
+   | `SMTP_USER` | SMTP username |
+   | `SMTP_APP_PASSWORD` | SMTP app password |
+   | `NEXT_PUBLIC_PHONE` | *(optional)* Business phone |
 
-```bash
-npm run build
-npm run start
-```
+5. Click **Deploy**.
 
-Ensure all environment variables are set and the Supabase instance is accessible from the host.
+> **Tip:** After the first deploy, add your custom domain under **Settings → Domains** and update `NEXT_PUBLIC_SITE_URL` to match.
 
 ---
 

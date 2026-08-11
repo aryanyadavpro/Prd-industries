@@ -1,4 +1,11 @@
-/** Simple in-memory IP-based rate limiter for /api/enquiry. */
+/**
+ * Simple in-memory IP-based rate limiter for /api/enquiry.
+ *
+ * NOTE: On serverless platforms (e.g. Vercel), each function invocation may
+ * run in a separate instance so the Map is not shared globally. This still
+ * provides per-instance burst protection. For stricter enforcement, replace
+ * with Vercel KV or Upstash Redis.
+ */
 
 const ipMap = new Map<string, { count: number; resetAt: number }>();
 

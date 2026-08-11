@@ -28,6 +28,8 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  poweredByHeader: false,
+  reactStrictMode: true,
   images: {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 2592000, // 30 days image cache
