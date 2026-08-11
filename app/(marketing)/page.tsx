@@ -1,9 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
-import { LinkButton } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { getCategories } from "@/lib/supabase/queries";
 import { siteConfig } from "@/lib/siteConfig";
+import { PinnedScrollHero } from "@/components/ui/PinnedScrollHero";
 import {
   ScrollReveal,
   StaggerContainer,
@@ -45,72 +44,11 @@ export default async function HomePage() {
 
   return (
     <main>
-      {/* ─── Full-Bleed Hero Section ─── */}
-      <section className="relative min-h-[clamp(32rem,90vh,56rem)] flex items-end overflow-hidden">
-        {/* Background Image Container */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/hero-editorial.png"
-            alt="Precision Industrial Components"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-center scale-105 transition-transform duration-1000 ease-out"
-          />
-          <div className="overlay-gradient-strong" />
-        </div>
-
-        {/* Hero Content — Bottom-aligned like Atelier Noor */}
-        <div className="relative z-10 container-fluid pb-[clamp(3.5rem,10vh,7rem)] pt-[clamp(8rem,22vh,16rem)]">
-          <ScrollReveal direction="up" delay={0.1} distance={20}>
-            <p className="text-[clamp(0.8rem,0.9vw,0.9375rem)] font-medium tracking-[0.12em] uppercase text-[#FAF8F5]/80 mb-[clamp(0.75rem,1.5vh,1.25rem)]">
-              ISO 9001:2015 Certified Manufacturer
-            </p>
-          </ScrollReveal>
-
-          {/* Main Headline — Large serif */}
-          <ScrollReveal direction="up" delay={0.2} distance={30}>
-            <h1 className="font-serif fluid-hero text-[#FAF8F5] max-w-[clamp(22rem,60vw,52rem)] leading-[1.05] tracking-tight">
-              Precision Meets{" "}
-              <span className="italic font-normal text-[#FAF8F5]/90">
-                Industrial Excellence.
-              </span>
-            </h1>
-          </ScrollReveal>
-
-          {/* Subtitle */}
-          <ScrollReveal direction="up" delay={0.35} distance={20}>
-            <p className="mt-[clamp(1rem,2vh,1.5rem)] text-[clamp(0.9375rem,1.1vw,1.125rem)] text-[#FAF8F5]/80 max-w-[clamp(18rem,38vw,34rem)] leading-relaxed">
-              From high-pressure spiral gaskets to custom forged pipe flanges —
-              manufactured to micron tolerances and international standards.
-            </p>
-          </ScrollReveal>
-
-          {/* CTA Buttons */}
-          <ScrollReveal direction="up" delay={0.5} distance={20}>
-            <div className="mt-[clamp(1.75rem,3.5vh,2.75rem)] flex flex-wrap items-center gap-[clamp(0.875rem,1.8vw,1.5rem)]">
-              <LinkButton
-                href="/products"
-                variant="outline"
-                size="lg"
-                className="!border-[#FAF8F5]/50 !text-[#FAF8F5] hover:!bg-[#FAF8F5] hover:!text-[#1A1A1A] hover:!border-[#FAF8F5]"
-              >
-                Explore Products
-              </LinkButton>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-[clamp(0.375rem,0.6vw,0.5rem)] text-[clamp(0.75rem,0.85vw,0.875rem)] font-medium tracking-[0.08em] uppercase text-[#FAF8F5]/85 hover:text-[#FAF8F5] transition-colors hover-arrow"
-              >
-                <span>Request a Quote</span>
-                <span className="text-base">→</span>
-              </Link>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
+      {/* ─── Pinned Scroll Frame Sequence Hero ─── */}
+      <PinnedScrollHero />
 
       {/* ─── Philosophy / About Teaser ─── */}
-      <section className="section-py">
+      <section className="section-py bg-[#FAF8F5] relative z-20">
         <div className="container-fluid">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-[clamp(2rem,4vw,4rem)] items-start">
             {/* Left label */}
@@ -174,7 +112,7 @@ export default async function HomePage() {
       </section>
 
       {/* ─── Product Categories Grid ─── */}
-      <section className="section-py bg-[#F3EFE9]">
+      <section className="section-py bg-[#F3EFE9] relative z-20">
         <div className="container-fluid">
           <ScrollReveal>
             <SectionHeading
@@ -236,7 +174,7 @@ export default async function HomePage() {
       </section>
 
       {/* ─── Capabilities Interactive Accordion Section ─── */}
-      <section className="section-py">
+      <section className="section-py bg-[#FAF8F5] relative z-20">
         <div className="container-fluid">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-[clamp(2rem,4vw,5rem)]">
             {/* Left heading */}

@@ -7,24 +7,35 @@ import { siteConfig } from "@/lib/siteConfig";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolledPastHero, setScrolledPastHero] = useState(false);
   const pathname = usePathname();
 
   const isHome = pathname === "/";
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    const handleScroll = () => {
+      if (isHome) {
+        // Pinned hero track is 250vh tall. Un-pinning threshold is around 1.35 * viewport height.
+        // Navbar stays transparent with white text until scroll passes the dark pinned hero section.
+        const heroThreshold = window.innerHeight * 1.35;
+        setScrolledPastHero(window.scrollY > heroThreshold);
+      } else {
+        setScrolledPastHero(window.scrollY > 50);
+      }
+    };
 
-  // Determine if header currently sits on dark top hero (Home page, un-scrolled)
-  const isDarkState = isHome && !scrolled;
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isHome]);
+
+  // Dark state = On home page and still scrolling within the dark hero frame sequence
+  const isDarkState = isHome ? !scrolledPastHero : false;
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
+        scrolledPastHero
           ? "bg-[#FAF8F5]/92 backdrop-blur-md border-b border-[#E8E2D9] py-[clamp(0.75rem,1.5vh,1rem)] shadow-sm"
           : "bg-transparent py-[clamp(1.25rem,2.5vh,1.75rem)]"
       }`}
