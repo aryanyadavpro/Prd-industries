@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { enquirySchema } from "@/lib/validation";
 import { rateLimit } from "@/lib/rate-limit";
 import { sendEnquiryNotification } from "@/lib/mailer";
+import { supabaseAdmin } from "@/lib/supabase/server";
 
 export async function POST(req: NextRequest) {
   try {
@@ -37,8 +38,21 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: true });
     }
 
-    // 4. TODO: Insert into Supabase once wired
-    // await supabase.from("enquiries").insert({ ... });
+    // 4. Insert into Supabase
+    const { error: dbError } = await supabaseAdmin.from("enquiries").insert({
+      name: data.name,
+      company: data.company || null,
+      email: data.email,
+      phone: data.phone,
+      message: data.message,
+      // product_id is nullable — we store the product name in the email,
+      // but don't have a product_id from the form (it sends a product name string).
+    });
+
+    if (dbError) {
+      console.error("Supabase insert error:", dbError);
+      // Don't block the email — log and continue
+    }
 
     // 5. Send notification email
     await sendEnquiryNotification({
@@ -60,3 +74,4 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+

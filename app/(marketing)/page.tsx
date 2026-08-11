@@ -1,114 +1,198 @@
-import { LinkButton } from "@/components/ui/Button";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Card, CardBody } from "@/components/ui/Card";
-import { categories } from "@/lib/mockData";
-import { siteConfig } from "@/lib/siteConfig";
 import Link from "next/link";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { getCategories } from "@/lib/supabase/queries";
+import { siteConfig } from "@/lib/siteConfig";
+import { PinnedScrollHero } from "@/components/ui/PinnedScrollHero";
+import {
+  ScrollReveal,
+  StaggerContainer,
+  StaggerItem,
+  AnimatedCounter,
+  TextReveal,
+  ImageZoom,
+  CapabilitiesAccordion,
+} from "@/components/ui/AnimatedComponents";
 
-const stats = [
-  { value: `${new Date().getFullYear() - siteConfig.foundedYear}+`, label: "Years Experience" },
-  { value: "500+", label: "Products" },
-  { value: "1,200+", label: "Clients Served" },
-  { value: "99%", label: "On-Time Delivery" },
-];
+export const revalidate = 3600; // ISR: revalidate every hour
 
-export default function HomePage() {
+export default async function HomePage() {
+  const categories = await getCategories();
+  const yearsInBusiness = new Date().getFullYear() - siteConfig.foundedYear;
+
+  const capabilities = [
+    {
+      title: "Precision Manufacturing",
+      description:
+        "State-of-the-art CNC and forging facilities producing components to micron-level tolerances for critical industrial applications.",
+    },
+    {
+      title: "Quality Assurance",
+      description:
+        "ISO 9001:2015 certified. Every batch undergoes material testing, dimensional inspection, and pressure testing.",
+    },
+    {
+      title: "Custom Engineering",
+      description:
+        "In-house design team for custom specifications — non-standard sizes, exotic materials, and special coatings.",
+    },
+    {
+      title: "Fast Turnaround",
+      description:
+        "Strategically stocked inventory and optimised production lines for industry-leading lead times.",
+    },
+  ];
+
   return (
     <main>
-      {/* Hero */}
-      <section className="relative section-py overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 via-transparent to-blue-500/5" />
-        <div className="absolute top-[25vh] left-[15vw] w-[40vw] h-[40vw] rounded-full bg-amber-500/5 blur-3xl" />
+      {/* ─── Pinned Scroll Frame Sequence Hero ─── */}
+      <PinnedScrollHero />
 
-        <div className="container-fluid relative">
-          <div className="mx-auto max-w-[clamp(20rem,60vw,48rem)] text-center">
-            <p className="mb-[clamp(0.75rem,2vw,1rem)] inline-block rounded-full border border-amber-500/30 bg-amber-500/10 px-[clamp(0.75rem,2.5vw,1rem)] py-[clamp(0.25rem,0.8vw,0.375rem)] text-[clamp(0.75rem,1.2vw,0.875rem)] font-medium text-amber-400">
-              Trusted Since {siteConfig.foundedYear}
-            </p>
-            <h1 className="fluid-hero font-extrabold tracking-tight text-white">
-              Precision-Engineered{" "}
-              <span className="text-amber-400">Industrial Components</span>
-            </h1>
-            <p className="fluid-subhero mt-[clamp(0.75rem,2.5vw,1.5rem)] text-gray-400">
-              From gaskets to flanges — high-quality components built to
-              withstand extreme conditions. Request a quote in seconds.
-            </p>
-            <div className="mt-[clamp(1.5rem,4vw,2.5rem)] flex flex-col sm:flex-row items-center justify-center gap-[clamp(0.75rem,2vw,1rem)]">
-              <LinkButton href="/products" size="lg">
-                Browse Products
-              </LinkButton>
-              <LinkButton href="/contact" variant="outline" size="lg">
-                Get a Quote
-              </LinkButton>
+      {/* ─── Philosophy / About Teaser ─── */}
+      <section className="section-py bg-[#FAF8F5] relative z-20">
+        <div className="container-fluid">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-[clamp(2rem,4vw,4rem)] items-start">
+            {/* Left label */}
+            <div className="lg:col-span-3">
+              <ScrollReveal direction="right">
+                <p className="section-label">Our Philosophy</p>
+              </ScrollReveal>
+            </div>
+
+            {/* Right large text reveal */}
+            <div className="lg:col-span-9">
+              <TextReveal
+                text={`${siteConfig.name} engineers industrial components from first specification to final inspection, blending decades of manufacturing expertise with modern precision in every product we craft.`}
+                className="font-serif text-[clamp(1.625rem,3.5vw,3.125rem)] leading-[1.2] tracking-tight text-[#1A1A1A]"
+                delay={0.1}
+              />
             </div>
           </div>
+
+          {/* Stats Row with Animated Counter */}
+          <div className="mt-[clamp(3.5rem,7vh,6rem)] pt-[clamp(2.5rem,5vh,3.5rem)] border-t border-[#E8E2D9]">
+            <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4 gap-[clamp(1.5rem,3vw,3rem)]">
+              <StaggerItem>
+                <div className="font-serif text-[clamp(2.75rem,5.5vw,4.5rem)] font-medium text-[#1A1A1A] leading-none">
+                  <AnimatedCounter value={yearsInBusiness} suffix="+" />
+                </div>
+                <p className="mt-[clamp(0.5rem,1vh,0.75rem)] text-[clamp(0.75rem,0.8vw,0.875rem)] text-[#7A7468] uppercase tracking-[0.1em]">
+                  Years Experience
+                </p>
+              </StaggerItem>
+
+              <StaggerItem>
+                <div className="font-serif text-[clamp(2.75rem,5.5vw,4.5rem)] font-medium text-[#1A1A1A] leading-none">
+                  <AnimatedCounter value={1200} suffix="+" />
+                </div>
+                <p className="mt-[clamp(0.5rem,1vh,0.75rem)] text-[clamp(0.75rem,0.8vw,0.875rem)] text-[#7A7468] uppercase tracking-[0.1em]">
+                  Clients Served
+                </p>
+              </StaggerItem>
+
+              <StaggerItem>
+                <div className="font-serif text-[clamp(2.75rem,5.5vw,4.5rem)] font-medium text-[#1A1A1A] leading-none">
+                  <AnimatedCounter value={99} suffix="%" />
+                </div>
+                <p className="mt-[clamp(0.5rem,1vh,0.75rem)] text-[clamp(0.75rem,0.8vw,0.875rem)] text-[#7A7468] uppercase tracking-[0.1em]">
+                  On-Time Delivery
+                </p>
+              </StaggerItem>
+
+              <StaggerItem>
+                <div className="font-serif text-[clamp(2.75rem,5.5vw,4.5rem)] font-medium text-[#8B7355] leading-none">
+                  ISO
+                </div>
+                <p className="mt-[clamp(0.5rem,1vh,0.75rem)] text-[clamp(0.75rem,0.8vw,0.875rem)] text-[#7A7468] uppercase tracking-[0.1em]">
+                  9001:2015 Certified
+                </p>
+              </StaggerItem>
+            </StaggerContainer>
+          </div>
         </div>
       </section>
 
-      {/* Categories */}
-      <section className="section-py bg-gray-900/30">
+      {/* ─── Product Categories Grid ─── */}
+      <section className="section-py bg-[#F3EFE9] relative z-20">
         <div className="container-fluid">
-          <SectionHeading
-            title="Product Categories"
-            subtitle="Explore our range of industrial sealing and connection solutions"
-          />
-          <div className="grid grid-cols-1 gap-[clamp(0.75rem,2.5vw,1.5rem)] sm:grid-cols-2 lg:grid-cols-4">
-            {categories.map((cat) => (
-              <Link key={cat.id} href={`/products?category=${cat.slug}`}>
-                <Card>
-                  <CardBody className="text-center">
-                    <div className="mx-auto mb-[clamp(0.75rem,2vw,1rem)] flex h-[clamp(2.5rem,5vw,3.5rem)] w-[clamp(2.5rem,5vw,3.5rem)] items-center justify-center rounded-[clamp(0.5rem,1.2vw,0.75rem)] bg-amber-500/10">
-                      <svg className="icon-lg text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                      </svg>
+          <ScrollReveal>
+            <SectionHeading
+              label="What We Offer"
+              title="Product Categories"
+              subtitle="Explore our specialized range of sealing and fluid-handling solutions"
+            />
+          </ScrollReveal>
+
+          <StaggerContainer className="grid grid-cols-1 gap-[clamp(1.25rem,2.5vw,1.75rem)] sm:grid-cols-2 lg:grid-cols-4">
+            {categories.map((cat, i) => (
+              <StaggerItem key={cat.id}>
+                <Link href={`/products?category=${cat.slug}`} className="block group">
+                  <ImageZoom className="card-editorial bg-[#FAF8F5] h-full">
+                    <div className="p-[clamp(1.5rem,3vw,2.25rem)] flex flex-col justify-between h-full">
+                      <div>
+                        {/* Number marker */}
+                        <span className="num-marker text-[clamp(0.75rem,0.8vw,0.875rem)]">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+
+                        {/* Icon Container */}
+                        <div className="mt-[clamp(1.5rem,3vh,2rem)] mb-[clamp(1.25rem,2.5vh,1.75rem)] flex h-[clamp(2.75rem,4vw,3.5rem)] w-[clamp(2.75rem,4vw,3.5rem)] items-center justify-center rounded-full border border-[#E8E2D9] group-hover:border-[#8B7355] group-hover:bg-[#8B7355] group-hover:text-[#FAF8F5] transition-all duration-500">
+                          <svg
+                            className="w-[clamp(1.25rem,1.6vw,1.5rem)] h-[clamp(1.25rem,1.6vw,1.5rem)] text-[#7A7468] group-hover:text-[#FAF8F5] transition-colors"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={1.5}
+                              d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+                            />
+                          </svg>
+                        </div>
+
+                        <h3 className="font-serif text-[clamp(1.25rem,1.6vw,1.5rem)] font-medium text-[#1A1A1A] group-hover:text-[#8B7355] transition-colors">
+                          {cat.name}
+                        </h3>
+                        <p className="mt-[clamp(0.5rem,1vh,0.75rem)] text-[clamp(0.8125rem,0.85vw,0.9375rem)] text-[#7A7468] leading-relaxed line-clamp-2">
+                          {cat.description}
+                        </p>
+                      </div>
+
+                      {/* Explore Link */}
+                      <div className="mt-[clamp(1.25rem,2.5vh,1.75rem)] flex items-center gap-[clamp(0.25rem,0.5vw,0.375rem)] text-[clamp(0.75rem,0.8vw,0.8125rem)] font-medium tracking-[0.08em] uppercase text-[#8B7355] hover-arrow">
+                        <span>Explore</span>
+                        <span>→</span>
+                      </div>
                     </div>
-                    <h3 className="text-[clamp(0.95rem,1.6vw,1.125rem)] font-semibold text-white">
-                      {cat.name}
-                    </h3>
-                    <p className="mt-[clamp(0.25rem,0.8vw,0.375rem)] text-[clamp(0.8rem,1.2vw,0.875rem)] text-gray-400">
-                      {cat.description}
-                    </p>
-                  </CardBody>
-                </Card>
-              </Link>
+                  </ImageZoom>
+                </Link>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="section-py">
+      {/* ─── Capabilities Interactive Accordion Section ─── */}
+      <section className="section-py bg-[#FAF8F5] relative z-20">
         <div className="container-fluid">
-          <div className="grid grid-cols-2 gap-[clamp(1rem,4vw,2rem)] lg:grid-cols-4">
-            {stats.map((stat) => (
-              <div key={stat.label} className="text-center">
-                <p className="text-[clamp(2rem,6vw,3.5rem)] font-extrabold text-amber-400">
-                  {stat.value}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-[clamp(2rem,4vw,5rem)]">
+            {/* Left heading */}
+            <div className="lg:col-span-4">
+              <ScrollReveal direction="right">
+                <p className="section-label mb-[clamp(0.75rem,1.5vh,1rem)]">What We Do</p>
+                <h2 className="font-serif fluid-heading text-[#1A1A1A]">
+                  Our Capabilities
+                </h2>
+                <p className="mt-3 text-[clamp(0.875rem,0.95vw,1rem)] text-[#7A7468] leading-relaxed">
+                  Click any capability to expand detailed technical specifications and quality assurance standards.
                 </p>
-                <p className="mt-[clamp(0.125rem,0.5vw,0.25rem)] text-[clamp(0.8rem,1.3vw,0.95rem)] text-gray-400">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+              </ScrollReveal>
+            </div>
 
-      {/* CTA */}
-      <section className="section-py">
-        <div className="container-fluid">
-          <div className="rounded-[clamp(0.75rem,2vw,1rem)] bg-gradient-to-r from-amber-500/10 to-amber-600/5 border border-amber-500/20 p-[clamp(1.5rem,6vw,4rem)] text-center">
-            <h2 className="text-[clamp(1.5rem,4vw,2.25rem)] font-bold text-white">
-              Need a Custom Solution?
-            </h2>
-            <p className="mt-[clamp(0.5rem,1.5vw,0.75rem)] text-[clamp(0.9rem,1.5vw,1.125rem)] text-gray-400 max-w-[clamp(16rem,45vw,36rem)] mx-auto">
-              Our engineering team can source or manufacture components to your
-              exact specifications. Reach out today.
-            </p>
-            <div className="mt-[clamp(1.5rem,4vw,2rem)] flex flex-col sm:flex-row items-center justify-center gap-[clamp(0.75rem,2vw,1rem)]">
-              <LinkButton href="/contact" size="lg">
-                Contact Us
-              </LinkButton>
+            {/* Right Interactive Accordion */}
+            <div className="lg:col-span-8">
+              <CapabilitiesAccordion items={capabilities} />
             </div>
           </div>
         </div>
